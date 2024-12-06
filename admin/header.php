@@ -82,7 +82,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="index.php" class="nav-link">
+            <a href="category.php" class="nav-link">
             <i class="fa-solid fa-list"></i>
               <p>
                 Category
