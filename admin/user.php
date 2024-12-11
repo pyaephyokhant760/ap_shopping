@@ -1,8 +1,7 @@
 <?php
 session_start();
 require '../config/config.php';
-// print_r($_SESSION['role']);
-if (empty($_SESSION['user_id']) || empty($_SESSION['logged_in']) ) {
+if (empty($_SESSION['user_id']) || empty($_SESSION['logged_in']) || $_SESSION['role'] != 1) {
   header('Location: login.php');
   exit();
 }
@@ -14,9 +13,6 @@ if (isset($_POST["search"])) {
       setcookie("search", "", time() - 3600, "/");
   }
 }
-
-
-
 ?>
 <?php include ('header.php') ?>
     <!-- Main content -->
@@ -26,7 +22,7 @@ if (isset($_POST["search"])) {
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Product Listen</h3>
+                <h3 class="card-title">Bordered Table</h3>
               </div>
               <?php
               if(!empty($_GET['pagenu'])) {
@@ -38,37 +34,39 @@ if (isset($_POST["search"])) {
               $offset = ($pagenu-1)*$numOfrecs;
 
               if(empty($_POST['search']) && empty($_COOKIE['search'])) {
-                $stmt = $conn->prepare("SELECT * FROM categories ORDER BY id DESC");
+                $stmt = $conn->prepare("SELECT * FROM users ORDER BY id DESC");
                 $stmt->execute();
                 $raw_result = $stmt->fetchAll(PDO::FETCH_DEFAULT);
                 $total_pagenu = ceil(count($raw_result) / $numOfrecs);
                 
-                $stmt = $conn->prepare("SELECT * FROM categories ORDER BY id DESC LIMIT $offset,$numOfrecs ");
+                $stmt = $conn->prepare("SELECT * FROM users ORDER BY id DESC LIMIT $offset,$numOfrecs");
                 $stmt->execute();
                 $result = $stmt->fetchAll(PDO::FETCH_DEFAULT);
               }else{
                 $searchKey = isset($_POST["search"]) ? $_POST["search"] : (isset($_COOKIE["search"]) ? $_COOKIE["search"] : '');
-                $stmt = $conn->prepare("SELECT * FROM categories WHERE name LIKE '%$searchKey%' ORDER BY id DESC");
+                $stmt = $conn->prepare("SELECT * FROM users WHERE name LIKE '%$searchKey%' ORDER BY id DESC");
                 $stmt->execute();
                 $raw_result = $stmt->fetchAll(PDO::FETCH_DEFAULT);
                 $total_pagenu = ceil(count($raw_result) / $numOfrecs);
                 
 
-                $stmt = $conn->prepare("SELECT * FROM categories WHERE name LIKE '%$searchKey%' ORDER BY id DESC LIMIT $offset,$numOfrecs ");
+                $stmt = $conn->prepare("SELECT * FROM users WHERE name LIKE '%$searchKey%' ORDER BY id DESC LIMIT $offset,$numOfrecs ");
                 $stmt->execute();
                 $result = $stmt->fetchAll(PDO::FETCH_DEFAULT);
               }
               ?>
+              <!-- /.card-header -->
               <div class="card-body">
                 <div>
-                  <a href="cat_add.php" type="button" class="btn btn-success">New Category</a>
+                  <a href="createUser.php" type="button" class="btn btn-success">Create User</a>
                 </div><br>
                 <table class="table table-bordered">
                   <thead>                  
                     <tr>
                       <th style="width: 10px">#</th>
                       <th>Name</th>
-                      <th>Description</th>
+                      <th>Email</th>
+                      <th>Role</th>
                       <th style="width: 40px">Action</th>
                     </tr>
                   </thead>
@@ -81,14 +79,15 @@ if (isset($_POST["search"])) {
                        <tr>
                       <td><?php echo $i; ?></td>
                       <td><?php echo $data['name']; ?></td>
-                      <td><?php echo substr($data['description'],0,50); ?></td>
+                      <td><?php echo substr($data['email'],0,50); ?></td>
+                      <td><?php if($data['role'] == 1){echo 'Admin';}else{echo 'User';} ?></td>
                       <td>
                        <div class="btn-group">
                         <div class="container">
-                          <a href="cat_edit.php?id=<?php echo $data['id']; ?>" type="button" class="btn btn-danger">Edit</a>
+                          <a href="userEdit.php?id=<?php echo $data['id']; ?>" type="button" class="btn btn-danger">Edit</a>
                          </div>
                           <div class="container">
-                            <a href="cat_delete.php?id=<?php echo $data['id']; ?>" type="button" class="btn btn-warning">Delete</a>
+                            <a href="userDelete.php?id=<?php echo $data['id']; ?>" type="button" class="btn btn-warning">Delete</a>
                           </div>
                        </div>
                       </td>
@@ -123,5 +122,3 @@ if (isset($_POST["search"])) {
     <!-- /.content -->
   </div>
   <?php include ('footer.html') ?>
-  
-  

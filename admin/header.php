@@ -9,6 +9,7 @@
 
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
@@ -33,7 +34,15 @@
   
   ?>
     <!-- SEARCH FORM -->
-    <form class="form-inline ml-3" method="post" action="<?php echo $page == 'index.php' ? 'index.php': 'user.php'?>">
+    <form class="form-inline ml-3" method="post" 
+    <?php if($page == 'index.php') :?>
+      action="index.php"
+    <?php elseif($page == 'category.php') :?>
+      action='category.php'
+    <?php elseif($page == 'user.php') :?>
+      action='user.php'
+    <?php endif; ?>
+    >
       <div class="input-group input-group-sm">
         <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search" name="search">
         <div class="input-group-append">
