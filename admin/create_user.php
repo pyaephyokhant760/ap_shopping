@@ -6,24 +6,32 @@ if (empty($_SESSION['user_id']) || empty($_SESSION['logged_in']) || $_SESSION['r
   exit();
 }
 if ($_POST) {
-  if (empty($_POST['name']) || empty($_POST['email']) || empty($_FILES['password']) || strlen($_POST['password']) < 4) {
+  if (empty($_POST['name']) || empty($_POST['email']) || empty($_POST['address']) || empty($_POST['phone']) || empty($_POST['password']) || strlen($_POST['password']) < 4) {
     if (empty($_POST['name'])) {
       $nameError = 'Name Could Not Be Null';
     }
     if (empty($_POST['email'])) {
       $emailError = 'Email Could Not Be Null';
     }
-    if (empty($_FILES['password'])) {
+    if (empty($_POST['address'])) {
+      $addressError = 'address Could Not Be Null';
+    }
+    if (empty($_POST['phone'])) {
+      $phoneError = 'phone Could Not Be Null';
+    }
+    if (empty($_POST['password'])) {
       $passwordError = 'Password Could Not Be Null';
     }
-    if(strlen($_POST['password']) < 4){
+    if (strlen($_POST['password']) < 4) {
       $passwordError = 'Password Should Be 4 Character at least';
     }
   } else {
     $id = $_POST['id'];
     $name = $_POST['name'];
     $email = $_POST['email'];
-    $password = password_hash($_POST['password'],PASSWORD_DEFAULT);
+    $address = $_POST['address'];
+    $phone = $_POST['phone'];
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     if ($_POST['role'] == 'admin') {
       $role = 1;
     } else {
@@ -38,10 +46,12 @@ if ($_POST) {
     if ($user) {
       echo "<script>alert('Already Email')</script>";
     } else {
-      $stmt = $conn->prepare('INSERT INTO users(name, email,role,password) VALUES (:name, :email, :role, :password)');
+      $stmt = $conn->prepare('INSERT INTO users(name, email,address,phone,role,password) VALUES (:name, :email, :address, :phone, :role, :password)');
       $result = $stmt->execute([
         ':name' => $name,
         ':email' => $email,
+        ':address' => $address,
+        ':phone' => $phone,
         ':password' => $password,
         ':role' => $role
       ]);
@@ -61,19 +71,32 @@ if ($_POST) {
       <div class="col-md-12">
         <div class="card">
           <div class="card-body">
-            <form action="" method="post">
+            <form action="create_user.php" method="post">
               <div class="form-group">
-                <label for="">Name</label><p style="color:red"><?php echo empty($nameError) ? '' : '*'.$nameError ?></p>
+                <label for="">Name</label>
+                <p style="color:red"><?php echo empty($nameError) ? '' : '*' . $nameError ?></p>
                 <input type="hidden" name="id">
-                <input type="text" name="name" id="" class="form-control" >
+                <input type="text" name="name" id="" class="form-control">
               </div>
               <div class="form-group">
-                <label for="">Email</label><p style="color:red"><?php echo empty($emailError) ? '' : '*'.$emailError ?></p>
-                <input type="email" name="email" class="form-control" >
+                <label for="">Email</label>
+                <p style="color:red"><?php echo empty($emailError) ? '' : '*' . $emailError ?></p>
+                <input type="email" name="email" class="form-control">
               </div>
               <div class="form-group">
-                <label for="">Password</label><p style="color:red"><?php echo empty($passwordError) ? '' : '*'.$passwordError ?></p>
-                <input type="password" name="password" class="form-control" >
+                <label for="">Address</label>
+                <p style="color:red"><?php echo empty($addressError) ? '' : '*' . $addressError ?></p>
+                <input type="text" name="address" id="" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="">Phone</label>
+                <p style="color:red"><?php echo empty($phoneError) ? '' : '*' . $phoneError ?></p>
+                <input type="number" name="phone" id="" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="">Password</label>
+                <p style="color:red"><?php echo empty($passwordError) ? '' : '*' . $passwordError ?></p>
+                <input type="password" name="password" class="form-control">
               </div>
               <div class="form-check">
                 <input type="hidden" name="role" value="user">
