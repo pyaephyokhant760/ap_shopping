@@ -61,7 +61,7 @@ if (isset($_POST["search"])) {
               ?>
               <div class="card-body">
                 <div>
-                  <a href="cat_add.php" type="button" class="btn btn-success">New Category</a>
+                  <a href="cat_add.php" type="button" class="btn btn-success">Create New Category</a>
                 </div><br>
                 <table class="table table-bordered">
                   <thead>                  
