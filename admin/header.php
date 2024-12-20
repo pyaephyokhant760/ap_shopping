@@ -33,26 +33,29 @@
       $link = $_SERVER['PHP_SELF'];
       $link_array = explode('/', $link);
       $page = end($link_array);
-
       ?>
       <!-- SEARCH FORM -->
-      <form class="form-inline ml-3" method="post"
-        <?php if ($page == 'index.php') : ?>
-        action="index.php"
-        <?php elseif ($page == 'category.php') : ?>
-        action='category.php'
-        <?php elseif ($page == 'user.php') : ?>
-        action='user.php'
-        <?php endif; ?>>
-        <div class="input-group input-group-sm">
-          <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search" name="search">
-          <div class="input-group-append">
-            <button class="btn btn-navbar" type="submit">
-              <i class="fas fa-search"></i>
-            </button>
+      
+      <?php if ($page != 'order.php') { ?>
+        <form class="form-inline ml-3" method="post"
+          <?php if ($page == 'index.php') : ?>
+          action="index.php"
+          <?php elseif ($page == 'category.php') : ?>
+          action='category.php'
+          <?php elseif ($page == 'user.php') : ?>
+          action='user.php'
+          <?php endif; ?>
+          >
+          <div class="input-group input-group-sm">
+            <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search" name="search">
+            <div class="input-group-append">
+              <button class="btn btn-navbar" type="submit">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
           </div>
-        </div>
-      </form>
+        </form>
+        <?php } ?>
     </nav>
     <!-- /.navbar -->
 
@@ -93,7 +96,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="category.php" class="nav-link">
+              <a href="user.php" class="nav-link">
               <i class="fa-solid fa-user text-white"></i>
                 <p>
                   User

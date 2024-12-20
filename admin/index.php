@@ -57,8 +57,6 @@ if (isset($_POST["search"])) {
                 $stmt = $conn->prepare("SELECT * FROM products WHERE name LIKE '%$searchKey%' ORDER BY id DESC LIMIT $offset,$numOfrecs ");
                 $stmt->execute();
                 $result = $stmt->fetchAll(PDO::FETCH_DEFAULT);
-                print_r($result);
-                exit();
               }
               ?>
               <!-- /.card-header -->
