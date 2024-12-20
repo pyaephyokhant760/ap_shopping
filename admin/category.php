@@ -26,7 +26,7 @@ if (isset($_POST["search"])) {
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Product Listen</h3>
+                <h3 class="card-title">Category Table</h3>
               </div>
               <?php
               if(!empty($_GET['pagenu'])) {

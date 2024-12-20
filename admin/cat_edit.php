@@ -10,22 +10,22 @@ if (empty($_SESSION['user_id']) || empty($_SESSION['logged_in'])) {
 if ($_POST) {
   if (empty($_POST['name']) || empty($_POST['description'])) {
     if (empty($_POST['name'])) {
-        $nameError = 'Name Could Not Be Null';
+      $nameError = 'Name Could Not Be Null';
     }
     if (empty($_POST['description'])) {
-        $descriptionError = 'Description Could Not Be Null';
-    } 
-    } else {
-      $id = $_POST['id'];  
-      $name = $_POST['name'];
-      $description = $_POST['description'];
-
-      $stmt = $conn->prepare("UPDATE categories SET name='$name',description='$description' WHERE id='$id'");
-      $result = $stmt->execute();
-      if ($result) {
-        echo "<script>alert('Category Update Success');window.location.href='category.php';</script>";
-      }
+      $descriptionError = 'Description Could Not Be Null';
     }
+  } else {
+    $id = $_POST['id'];
+    $name = $_POST['name'];
+    $description = $_POST['description'];
+
+    $stmt = $conn->prepare("UPDATE categories SET name='$name',description='$description' WHERE id='$id'");
+    $result = $stmt->execute();
+    if ($result) {
+      echo "<script>alert('Category Update Success');window.location.href='category.php';</script>";
+    }
+  }
 }
 
 $stmt = $conn->prepare("SELECT * FROM categories WHERE id=" . $_GET['id']);
@@ -42,16 +42,17 @@ $result = $stmt->fetchAll(PDO::FETCH_DEFAULT);
         <div class="card">
           <div class="card-body">
             <form action="" method="post">
-            <input name="_token" type="hidden" value="<?php echo $_SESSION['_token']; ?>">
-            <input type="hidden" name="id" value="<?php echo $result[0]['id']; ?>">
-            <div class="form-group">
+              <input name="_token" type="hidden" value="<?php echo $_SESSION['_token']; ?>">
+              <input type="hidden" name="id" value="<?php echo $result[0]['id']; ?>">
+              <div class="form-group">
                 <label for="title">Nmae</label>
-                <p style="color:red"><?php echo empty($nameError) ? '' : '*'.$nameError ?></p>
+                <p style="color:red"><?php echo empty($nameError) ? '' : '*' . $nameError ?></p>
                 <input type="text" name="name" id="nmae" class="form-control" value="<?php echo $result[0]['name']; ?>">
               </div>
 
               <div class="form-group">
-                <label for="">Description</label><p style="color:red"><?php echo empty($descriptionError) ? '' : '*'.$descriptionError ?></p>
+                <label for="">Description</label>
+                <p style="color:red"><?php echo empty($descriptionError) ? '' : '*' . $descriptionError ?></p>
                 <textarea name="description" id="" class="form-control"><?php echo $result[0]['description']; ?></textarea>
               </div>
               <div class="form-group">

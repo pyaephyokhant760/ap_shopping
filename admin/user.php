@@ -22,7 +22,7 @@ if (isset($_POST["search"])) {
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Bordered Table</h3>
+                <h3 class="card-title">User Table</h3>
               </div>
               <?php
               if(!empty($_GET['pagenu'])) {
@@ -58,7 +58,7 @@ if (isset($_POST["search"])) {
               <!-- /.card-header -->
               <div class="card-body">
                 <div>
-                  <a href="createUser.php" type="button" class="btn btn-success">Create User</a>
+                  <a href="create_user.php" type="button" class="btn btn-success">Create User</a>
                 </div><br>
                 <table class="table table-bordered">
                   <thead>                  

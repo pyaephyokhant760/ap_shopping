@@ -7,20 +7,20 @@ if (empty($_SESSION['user_id']) || empty($_SESSION['logged_in']) || $_SESSION['r
 }
 
 if ($_POST) {
-    if (empty($_POST['name']) || empty($_POST['email']) ) {
+    if (empty($_POST['name']) || empty($_POST['email'])) {
         if (empty($_POST['name'])) {
             $nameError = 'Name Could Not Be Null';
         }
         if (empty($_POST['email'])) {
             $emailError = 'Email Could Not Be Null';
         }
-    }elseif (!empty($_POST['password']) && strlen($_POST['password']) < 4){
+    } elseif (!empty($_POST['password']) && strlen($_POST['password']) < 4) {
         $passwordError = 'Password Should Be 4 Character at least';
-    }else {
+    } else {
         $id = $_POST['id'];
         $name = $_POST['name'];
         $email = $_POST['email'];
-        $password = password_hash($_POST['password'],PASSWORD_DEFAULT);
+        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $role = ($_POST['role'] == 'admin') ? 1 : 0;
 
 
@@ -66,12 +66,12 @@ $result = $stmt->fetchAll(PDO::FETCH_DEFAULT);
                             <div class="form-group">
                                 <label for="">Name</label>
                                 <p style="color:red"><?php echo empty($nameError) ? '' : '*' . $nameError ?></p>
-                                <input type="text" name="name" value="<?php echo $result[0]['name']; ?>" class="form-control" >
+                                <input type="text" name="name" value="<?php echo $result[0]['name']; ?>" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="">Email</label>
                                 <p style="color:red"><?php echo empty($emailError) ? '' : '*' . $emailError ?></p>
-                                <input type="email" name="email" class="form-control"  value="<?php echo $result[0]['email']; ?>">
+                                <input type="email" name="email" class="form-control" value="<?php echo $result[0]['email']; ?>">
                             </div>
                             <div class="form-group">
                                 <label for="">Password</label>
