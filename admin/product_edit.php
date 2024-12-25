@@ -38,6 +38,7 @@ if ($_POST) {
       if ($imageType != 'jpg' && $imageType != 'jpeg' && $imageType != 'png') {
         echo "<script>alert('Image should be jpg,jpeg,png');</script>";
       } else { //image validation success
+        $id = $_POST['id'];
         $name = $_POST['name'];
         $desc = $_POST['description'];
         $category = $_POST['category'];
@@ -47,10 +48,10 @@ if ($_POST) {
 
         move_uploaded_file($_FILES['image']['tmp_name'], $file);
 
-        $stmt = $conn->prepare("UPDATE products SET name=:name,description=:description,category_id=:category,price=:price,quantity=:quantity,image=:image");
+        $stmt = $conn->prepare("UPDATE products SET name=:name,description=:description,category_id=:category,price=:price,quantity=:quantity,image=:image WHERE id=:id");
 
         $updateresult = $stmt->execute(
-            array(':name' => $name, ':description' => $desc, ':category' => $category, ':price' => $price, ':quantity' => $qty));
+            array(':name' => $name, ':description' => $desc, ':category' => $category, ':price' => $price, ':quantity' => $qty, ':id' => $id));
   
   
         if ($updateresult) {
@@ -58,16 +59,17 @@ if ($_POST) {
         }
       }
     } else {
+      $id = $_POST['id'];
       $name = $_POST['name'];
       $desc = $_POST['description'];
       $category = $_POST['category'];
       $qty = $_POST['quantity'];
       $price = $_POST['price'];
 
-      $stmt = $conn->prepare("UPDATE products SET name=:name,description=:description,category_id=:category,price=:price,quantity=:quantity");
+      $stmt = $conn->prepare("UPDATE products SET name=:name,description=:description,category_id=:category,price=:price,quantity=:quantity WHERE id=:id");
 
         $nullresult = $stmt->execute(
-          array(':name' => $name, ':description' => $desc, ':category' => $category, ':price' => $price, ':quantity' => $qty));
+          array(':name' => $name, ':description' => $desc, ':category' => $category, ':price' => $price, ':quantity' => $qty, ':id' => $id));
 
 
       if ($nullresult) {

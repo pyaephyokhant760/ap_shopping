@@ -3,7 +3,7 @@ session_start();
 require '../config/config.php';
 // print_r($_SESSION['role']);
 if (empty($_SESSION['user_id']) || empty($_SESSION['logged_in']) || $_SESSION['role'] != 1) {
-  header('Location: login.php');
+  header('Location: /admin/login.php');
   exit();
 }
 if (isset($_POST["search"])) {
