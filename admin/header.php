@@ -36,6 +36,7 @@
       ?>
       <!-- SEARCH FORM -->
       
+    <?php if($page == 'index.php' || $page == 'user.php' || $page == 'category.php') {?>
       <?php if ($page != 'order.php') { ?>
         <form class="form-inline ml-3" method="post"
           <?php if ($page == 'index.php') : ?>
@@ -56,6 +57,9 @@
           </div>
         </form>
         <?php } ?>
+    <?php } ?>
+
+      
     </nav>
     <!-- /.navbar -->
 
