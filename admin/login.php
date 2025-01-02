@@ -16,9 +16,9 @@ if ($_POST) {
       $_SESSION['user_id'] = $user['id'];
       $_SESSION['username'] = $user['name'];
       $_SESSION['role'] = $user['role'];
-      $_SESSION['logged_in'] = time();
       // print_r($_SESSION['role']);
       // exit();
+      $_SESSION['logged_in'] = time();
       header('Location: index.php');
     }
   }
