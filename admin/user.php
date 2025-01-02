@@ -1,9 +1,10 @@
 <?php
 session_start();
 require '../config/config.php';
-if (empty($_SESSION['user_id']) || empty($_SESSION['logged_in']) || $_SESSION['role'] != 1) {
-  header('Location: /admin/login.php');
-  exit();
+if($_SESSION['role'] == 1) {
+  header('Location: login.php');
+} elseif(empty($_SESSION['user_id']) || empty($_SESSION['logged_in'])){
+  header('Location: login.php');
 }
 if (isset($_POST["search"])) {
   setcookie("search", $_POST["search"], time() + (86400 * 30), "/");

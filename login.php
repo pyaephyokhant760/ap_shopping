@@ -19,8 +19,9 @@ if($_POST) {
 
 	if($user) {
 		if(password_verify($password,$user[0]['password'])) {
-			$_SESSION['user_id'] = $user['id'];
-			$_SESSION['username'] = $user['name'];
+			$_SESSION['user_id'] = $user[0]['id'];
+			$_SESSION['username'] = $user[0]['name'];
+			$_SESSION['role'] = $user[0]['role'];
 			$_SESSION['logged_in'] = time();
 			header("Location: index.php");
 		}

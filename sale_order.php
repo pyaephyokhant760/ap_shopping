@@ -5,23 +5,14 @@ session_start();
 require 'config/config.php';
 require 'config/common.php';
 
-if (empty($_SESSION['user_id']) && empty($_SESSION['logged_in'])) {
-  header('Location: login.php');
-}
-
-if (empty($_SESSION['cart'])) {
-    header('Location: login.php');
-} else {
-	$cart = $_SESSION['cart'];
-}
 
 if (!empty($_SESSION['cart'])) {
 	$userId = $_SESSION['user_id'];
 	$total = 0;
 
 	foreach ($_SESSION['cart'] as $key => $qty) {
-		$id = str_replace('id','',$key);
-		$stmt = $conn->prepare("SELECT * FROM products WHERE id=".$id);
+		$id = str_replace('id', '', $key);
+		$stmt = $conn->prepare("SELECT * FROM products WHERE id=" . $id);
 		$stmt->execute();
 		$result = $stmt->fetch(PDO::FETCH_ASSOC);
 		$total += $result['price'] * $qty;
@@ -30,21 +21,21 @@ if (!empty($_SESSION['cart'])) {
 	//insert into sale_orders table
 	$stmt = $conn->prepare("INSERT INTO sale_orders(customer_id,total_price,order_date) VALUES (:user_id,:total,:odate)");
 	$result = $stmt->execute(
-			array(':user_id'=>$userId,':total'=>$total,':odate'=>date('Y-m-d H:i:s'))
+		array(':user_id' => $userId, ':total' => $total, ':odate' => date('Y-m-d H:i:s'))
 	);
 
 	if ($result) {
 		$saleOrderId = $conn->lastInsertId();
 		// insert into sale_order_detail
 		foreach ($_SESSION['cart'] as $key => $qty) {
-			$id = str_replace('id','',$key);
+			$id = str_replace('id', '', $key);
 
 			$stmt = $conn->prepare("INSERT INTO sale_order_detail(sale_order_id,product_id,quantity) VALUES (:sid,:pid,:qty)");
 			$result = $stmt->execute(
-					array(':sid'=>$saleOrderId,':pid'=>$id,':qty'=>$qty)
+				array(':sid' => $saleOrderId, ':pid' => $id, ':qty' => $qty)
 			);
 
-			$qtyStmt = $conn->prepare("SELECT quantity FROM products WHERE id=".$id);
+			$qtyStmt = $conn->prepare("SELECT quantity FROM products WHERE id=" . $id);
 			$qtyStmt->execute();
 			$qResult = $qtyStmt->fetch(PDO::FETCH_ASSOC);
 
@@ -53,12 +44,11 @@ if (!empty($_SESSION['cart'])) {
 			$stmt = $conn->prepare("UPDATE products SET quantity=:qty WHERE id=:pid");
 
 			$result = $stmt->execute(
-					array(":qty"=>$updateQty,':pid'=>$id)
+				array(":qty" => $updateQty, ':pid' => $id)
 			);
 		}
 
 		unset($_SESSION['cart']);
-
 	}
 }
 
@@ -165,7 +155,7 @@ if (!empty($_SESSION['cart'])) {
 			</form>
 		</div>
 	</div>
-	</header> -->
+	</header>
 	<!-- End Header Area -->
 
 	<!-- Start Banner Area -->
@@ -175,7 +165,7 @@ if (!empty($_SESSION['cart'])) {
 				<div class="col-first">
 					<h1>Confirmation</h1>
 					<nav class="d-flex align-items-center">
-						<a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
+						<a href="index.php">Home<span class="lnr lnr-arrow-right"></span></a>
 						<a href="category.html">Confirmation</a>
 					</nav>
 				</div>
