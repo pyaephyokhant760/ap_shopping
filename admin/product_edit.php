@@ -51,7 +51,7 @@ if ($_POST) {
         $stmt = $conn->prepare("UPDATE products SET name=:name,description=:description,category_id=:category,price=:price,quantity=:quantity,image=:image WHERE id=:id");
 
         $updateresult = $stmt->execute(
-            array(':name' => $name, ':description' => $desc, ':category' => $category, ':price' => $price, ':quantity' => $qty, ':id' => $id));
+            array(':name' => $name, ':description' => $desc, ':category' => $category, ':price' => $price, ':quantity' => $qty, ':image' => $image, ':id' => $id));
   
   
         if ($updateresult) {
