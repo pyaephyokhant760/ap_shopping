@@ -1,5 +1,12 @@
 <?php include('header.php') ?>
-<!--================Cart Area =================-->
+
+<?php
+if($_SESSION['role'] == 0) {
+	header('Location: login.php');
+  } elseif(empty($_SESSION['user_id']) || empty($_SESSION['logged_in'])){
+	header('Location: login.php');
+  }
+?>
 <section class="cart_area">
     <div class="container">
         <div class="cart_inner">
