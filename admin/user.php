@@ -85,10 +85,10 @@ if (isset($_POST["search"])) {
                       <td>
                        <div class="btn-group">
                         <div class="container">
-                          <a href="userEdit.php?id=<?php echo $data['id']; ?>" type="button" class="btn btn-danger">Edit</a>
+                          <a href="edit_user.php?id=<?php echo $data['id']; ?>" type="button" class="btn btn-danger">Edit</a>
                          </div>
                           <div class="container">
-                            <a href="userDelete.php?id=<?php echo $data['id']; ?>" type="button" class="btn btn-warning">Delete</a>
+                            <a href="delete_user.php?id=<?php echo $data['id']; ?>" type="button" class="btn btn-warning">Delete</a>
                           </div>
                        </div>
                       </td>

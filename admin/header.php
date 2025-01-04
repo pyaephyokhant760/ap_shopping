@@ -16,6 +16,7 @@
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css">
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -35,31 +36,30 @@
       $page = end($link_array);
       ?>
       <!-- SEARCH FORM -->
-      
-    <?php if($page == 'index.php' || $page == 'user.php' || $page == 'category.php') {?>
-      <?php if ($page != 'order.php') { ?>
-        <form class="form-inline ml-3" method="post"
-          <?php if ($page == 'index.php') : ?>
-          action="index.php"
-          <?php elseif ($page == 'category.php') : ?>
-          action='category.php'
-          <?php elseif ($page == 'user.php') : ?>
-          action='user.php'
-          <?php endif; ?>
-          >
-          <div class="input-group input-group-sm">
-            <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search" name="search">
-            <div class="input-group-append">
-              <button class="btn btn-navbar" type="submit">
-                <i class="fas fa-search"></i>
-              </button>
-            </div>
-          </div>
-        </form>
-        <?php } ?>
-    <?php } ?>
 
-      
+      <?php if ($page == 'index.php' || $page == 'user.php' || $page == 'category.php' || $page == 'weekly.php') { ?>
+        <?php if ($page != 'order.php') { ?>
+          <form class="form-inline ml-3" method="post"
+            <?php if ($page == 'index.php') : ?>
+            action="index.php"
+            <?php elseif ($page == 'category.php') : ?>
+            action='category.php'
+            <?php elseif ($page == 'user.php') : ?>
+            action='user.php'
+            <?php endif; ?>>
+            <div class="input-group input-group-sm">
+              <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search" name="search">
+              <div class="input-group-append">
+                <button class="btn btn-navbar" type="submit">
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        <?php } ?>
+      <?php } ?>
+
+
     </nav>
     <!-- /.navbar -->
 
@@ -75,7 +75,7 @@
       <!-- Sidebar -->
       <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
-        
+
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
@@ -101,7 +101,7 @@
             </li>
             <li class="nav-item">
               <a href="user.php" class="nav-link">
-              <i class="fa-solid fa-user text-white"></i>
+                <i class="fa-solid fa-user text-white"></i>
                 <p>
                   User
                 </p>
@@ -109,12 +109,44 @@
             </li>
             <li class="nav-item">
               <a href="order.php" class="nav-link">
-              <i class="fa-solid fa-table text-white"></i>
+                <i class="fa-solid fa-table text-white"></i>
                 <p>
                   Order
                 </p>
               </a>
             </li>
+            <li class="nav-item">
+              <a href="weekly_report.php" class="nav-link">
+                <i class="fa-solid fa-chart-bar text-white"></i>
+                <p>
+                  Weekly Report
+                </p>
+              </a>
+              <li class="nav-item">
+              <a href="monthly_report.php" class="nav-link">
+                <i class="fa-solid fa-chart-bar text-white"></i>
+                <p>
+                  Monthly Report
+                </p>
+              </a>
+              <li class="nav-item">
+              <a href="monthly_report.php" class="nav-link">
+              <i class="fa-solid fa-person-military-pointing"></i>
+                <p>
+                  Royal Customers
+                </p>
+              </a>
+              <li class="nav-item">
+              <a href="monthly_report.php" class="nav-link">
+              <i class="fa-solid fa-cookie-bite"></i>
+                <p>
+                  Best Seller Items
+                </p>
+              </a>
+          </ul>
+          </li>
+          </ul>
+          </li>
           </ul>
         </nav>
         <!-- /.sidebar-menu -->
