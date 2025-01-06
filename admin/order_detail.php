@@ -90,8 +90,8 @@ if (isset($_POST["search"])) {
                 </table><br>
                 <nav aria-label="Page navigation example" style="float: right;">
                 <ul class="pagination">
-                  <li class="page-item"><a class="page-link" href="?pagenu=1">Frist</a></li>
-                  <li class="page-item <?php if($pagenu <= 1) { echo 'disabled'; }?>"><a class="page-link" href="<?php if($pagenu <= 1) {echo "";} else { echo '?pagenu='.($pagenu-1);}?>">Previous</a></li>
+                  <li class="page-item"><a class="page-link" href="?id=<?php echo $_GET['id']; ?>&pagenu=1">Frist</a></li>
+                  <li class="page-item <?php if($pagenu <= 1) { echo 'disabled'; }?>"><a class="page-link" href="<?php if($pagenu <= 1) {echo "";} else { echo "?id=".$_GET['id']."pagenu=".($pagenu-1);}?>">Previous</a></li>
                   <li class="page-item"><a class="page-link" href="#"><?php echo $pagenu; ?></a></li>
                   <li class="page-item <?php if($pagenu >= $total_pagenu) { echo 'disabled'; }?>"><a class="page-link" href="<?php if($pagenu >= $total_pagenu) {echo "";} else { echo '?pagenu='.($pagenu+1);}?>">Next</a></li>
                   <li class="page-item"><a class="page-link" href="?pagenu=<?php echo $total_pagenu?>">Last</a></li>

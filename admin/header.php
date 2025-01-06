@@ -130,14 +130,14 @@
                 </p>
               </a>
               <li class="nav-item">
-              <a href="monthly_report.php" class="nav-link">
+              <a href="royal_customer.php" class="nav-link">
               <i class="fa-solid fa-person-military-pointing"></i>
                 <p>
                   Royal Customers
                 </p>
               </a>
               <li class="nav-item">
-              <a href="monthly_report.php" class="nav-link">
+              <a href="best_seller.php" class="nav-link">
               <i class="fa-solid fa-cookie-bite"></i>
                 <p>
                   Best Seller Items
