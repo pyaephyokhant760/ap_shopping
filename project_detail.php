@@ -3,11 +3,11 @@
 <?php
 require 'config/config.php';
 
-if($_SESSION['role'] == 1) {
-  header('Location: login.php');
-} elseif(empty($_SESSION['user_id']) || empty($_SESSION['logged_in'])){
-  header('Location: login.php');
-}
+if($_SESSION['role'] == 0) {
+	header('Location: login.php');
+  } elseif(empty($_SESSION['user_id']) || empty($_SESSION['logged_in'])){
+	header('Location: login.php');
+  }
 
 $stmt = $conn->prepare("SELECT * FROM products WHERE id=".$_GET['id']);
 $stmt->execute();
